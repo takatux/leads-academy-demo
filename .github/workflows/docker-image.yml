@@ -33,7 +33,7 @@ jobs:
       with:
         tags: |
           public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
-          public.ecr.aws/j3q3x4x2/leadsacademydemo:${{ steps.sha.outputs.sha7 }}
+          public.ecr.aws/j3q3x4x2/leadsacademydemo:${{ steps.sha.outputs.sha7 }
 
   deploy:
     needs: build
