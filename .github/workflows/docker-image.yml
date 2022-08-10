@@ -43,10 +43,10 @@ jobs:
     - uses: actions/checkout@v3
     - run: whoami
     - name: Pull image update
-      run: docker pull public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
+      run: sudo docker pull public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
     - name: Run Container
       run: |
-        docker rm -f leadsacademydemo
-        docker run -dit -p 5000:5000 --name leadsacademydemo public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
+        sudo docker rm -f leadsacademydemo
+        sudo docker run -dit -p 5000:5000 --name leadsacademydemo public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
     - name: Cleanup
       run: docker system prune -f
