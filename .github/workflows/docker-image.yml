@@ -41,6 +41,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - run: whoami
     - name: Pull image update
       run: docker pull public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
     - name: Run Container
