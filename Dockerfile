@@ -14,5 +14,5 @@ ENV FLASK_DEBUG=false
 
 RUN pip install waitress
 EXPOSE 5000
-CMD [ "waitress-serve", "--call", "flaskr:create_app" ]
+CMD [ "waitress-serve", "--listen=*:8080", "--call", "flaskr:create_app" ]
 #CMD [ "flask", "run", "-h", "0.0.0.0", "-p", "5000" ]
