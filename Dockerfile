@@ -1,24 +1,18 @@
-FROM node:12.22.11-alpine as build-react
+FROM python:3.9.13-slim-buster
 
-# set working directory
-WORKDIR /app
+WORKDIR /flask-demo
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-COPY package.json ./
-
-# install app dependencies
 COPY . .
-RUN yarn install
-RUN yarn build
 
+RUN pip install -e .
+#RUN pip install wheel && python setup.py bdist_wheel
+#RUN pip install dist/flaskr-1.0.0-py3-none-any.whl
 
-#STAGE nginx
+ENV FLASK_APP=flaskr
+ENV FLASK_DEBUG=false
+#RUN flask init-db
 
-FROM nginx:1.21.5-alpine
-COPY --from=build-react /app/build /usr/share/nginx/html
-RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/conf.d
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-
+#RUN pip install waitress
+EXPOSE 5000
+#CMD [ "waitress-serve", "--listen=*:5000", "--call", "flaskr:create_app" ]
+CMD [ "flask", "run", "-h", "0.0.0.0", "-p", "5000" ]
