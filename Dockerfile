@@ -1,4 +1,4 @@
-FROM node:13.12.0-alpine as build-react
+FROM node:12.22.11-alpine as build-react
 
 # set working directory
 WORKDIR /app
