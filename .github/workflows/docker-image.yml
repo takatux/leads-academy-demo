@@ -21,7 +21,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm test
+      - run: |
+          npm install --silent
+          npm install react-scripts@3.4.1 -g --silent
+          CI=true npm test
       
   build:
     needs: test
