@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Leads Academy CI
 
 on:
   push:
@@ -35,3 +35,17 @@ jobs:
           public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
           public.ecr.aws/j3q3x4x2/leadsacademydemo:${{ steps.sha.outputs.sha7 }}
 
+  deploy:
+
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Pull image update
+      run: docker pull public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
+    - name: Run Container
+      run: |
+        docker rm -f leadsacademydemo
+        docker run -dit -p 80:5000 --name leadsacademydemo public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
+    - name: Cleanup
+      run: docker system prune -f
