@@ -49,4 +49,4 @@ jobs:
         sudo docker rm -f leadsacademydemo
         sudo docker run -dit -p 5000:5000 --name leadsacademydemo public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
     - name: Cleanup
-      run: docker system prune -f
+      run: sudo docker system prune -f
