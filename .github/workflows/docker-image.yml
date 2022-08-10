@@ -22,7 +22,7 @@ jobs:
       with:
         access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        region: ap-southeast-1
+        region: us-east-1
         local-image: leadsacademydemo
-        image: leadsacademydemo:dev-${{ github.sha }}
+        image: public.ecr.aws/j3q3x4x2/leadsacademydemo:dev-${{ github.sha }}, public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
 
