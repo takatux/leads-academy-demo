@@ -2,7 +2,7 @@
 <img src="https://i.ibb.co/mHD73K0/gif-betteraim.gif" alt="Gif demo" />
 </p>
 <h2 align="center">
-  🎯 <a href="https://betteraim.herokuapp.com">BetterAim Demo Devops </a> 🎯
+  🎯 <a href="https://betteraim.herokuapp.com">BetterAim Demo Devops 2</a> 🎯
 </h2>
 <h3 align="center">
   An aim training game with resizable windows, pause option and fullscreen mode.
