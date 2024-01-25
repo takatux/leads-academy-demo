@@ -2,10 +2,10 @@ name: Leads Academy CI
 
 on:
   push:
-    branches: [ "main" ]
-#  pull_request:
-#    branches: [ "main" ]
-
+    branches: [ "hands-on-lab" ]
+    tags:        
+      - '**' 
+      
 jobs:
   test:
 
@@ -37,32 +37,21 @@ jobs:
       run: echo "::set-output name=sha7::$(echo ${GITHUB_SHA} | cut -c1-7)"
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
-    - name: Build and Push to ECR public
-      id: build-and-push
-      uses: pahud/ecr-public-action@8cd826db40befb59b0cd0b60b22a7ba72d06a7f7
-      with:
-        tags: |
-          public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
-          public.ecr.aws/j3q3x4x2/leadsacademydemo:${{ steps.sha.outputs.sha7 }}
+    - name: Build Finish
+      run : echo "Build Demo Finished !"
 
   deploy:
     needs: build
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
     - run: whoami
     - name: Pull image update
-      run: sudo docker pull public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
+      run: echo "Deploying application in progress ...."
     - name: Run Container
       run: |
-        sudo docker rm -f leadsacademydemo
-        sudo docker run -dit -p 8081:3000 --name leadsacademydemo public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
+        echo sudo docker rm -f leadsacademydemo
+        echo sudo docker run -dit -p 8081:3000 --name leadsacademydemo public.ecr.aws/j3q3x4x2/leadsacademydemo:latest
     - name: Cleanup
-      run: sudo docker system prune -f
+      run: echo sudo docker system prune -f
